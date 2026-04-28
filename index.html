@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essentia Communication — Marketing & Visibilité</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #C0141B;
+      --red-dark: #9a1016;
+      --red-light: #e8181f;
+      --black: #111111;
+      --white: #FFFFFF;
+      --cream: #F7F4EF;
+      --gray: #e8e4dc;
+      --text: #2a2a2a;
+      --text-light: #666;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 36px; height: 36px;
+      background: var(--red);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      position: relative;
+    }
+    .nav-logo-mark::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; left: 50%; transform: translateX(-50%);
+      width: 10px; height: 10px;
+      background: var(--red);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      filter: brightness(0.7);
+    }
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+    .nav-logo-text span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: .9rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    .nav-cta {
+      background: var(--red);
+      color: var(--white) !important;
+      padding: .55rem 1.4rem;
+      border-radius: 2px;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--red-dark) !important; color: var(--white) !important; }
+
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-burger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--black);
+      transition: .3s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(192,20,27,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      padding: 5% 5% 5% 8%;
+      animation: fadeUp .8s ease both;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: .8rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid var(--red);
+      padding: .3rem .8rem;
+      margin-bottom: 2rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      line-height: .95;
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title .accent { color: var(--red); }
+    .hero-title .line-outline {
+      -webkit-text-stroke: 2px var(--black);
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-light);
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .95rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: .9rem 2rem;
+      border-radius: 2px;
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-block;
+      color: var(--black);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: .95rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: .9rem 2rem;
+      border: 2px solid var(--black);
+      border-radius: 2px;
+      transition: all .2s;
+    }
+    .btn-secondary:hover { background: var(--black); color: var(--white); }
+
+    .hero-visual {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s ease .3s both;
+    }
+    .hero-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+    }
+    .hero-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--cream) 0%, transparent 20%),
+                  linear-gradient(to top, rgba(192,20,27,.15) 0%, transparent 50%);
+    }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 2rem;
+      left: -2rem;
+      background: var(--white);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      gap: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,.12);
+      z-index: 2;
+      animation: fadeUp .8s ease .6s both;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--red);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-light);
+      margin-top: .2rem;
+    }
+
+    /* ── PROBLEM ── */
+    #problem {
+      background: var(--black);
+      color: var(--white);
+      padding: 6rem 8%;
+    }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .section-label {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: .8rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .problem-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+    .problem-item {
+      border-top: 2px solid var(--red);
+      padding-top: 1.5rem;
+    }
+    .problem-item-num {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 3rem;
+      color: rgba(255,255,255,.1);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .problem-item h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: .75rem;
+      color: var(--white);
+    }
+    .problem-item p {
+      font-size: .95rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,.6);
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--cream);
+      padding: 7rem 8%;
+    }
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5px;
+      background: var(--gray);
+    }
+    .service-card {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      transition: background .3s;
+      cursor: default;
+    }
+    .service-card:hover { background: var(--red); }
+    .service-card:hover .service-icon,
+    .service-card:hover .service-title,
+    .service-card:hover .service-desc { color: var(--white); }
+    .service-card:hover .service-icon { border-color: rgba(255,255,255,.3); }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      width: 56px; height: 56px;
+      border: 1px solid var(--gray);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 2px;
+      transition: all .3s;
+    }
+    .service-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      margin-bottom: .75rem;
+      color: var(--black);
+      transition: color .3s;
+    }
+    .service-desc {
+      font-size: .9rem;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--text-light);
+      transition: color .3s;
+    }
+    .service-items {
+      margin-top: 1rem;
+      list-style: none;
+    }
+    .service-items li {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--text-light);
+      padding: .3rem 0;
+      border-bottom: 1px solid var(--gray);
+      transition: color .3s;
+    }
+    .service-card:hover .service-items li {
+      color: rgba(255,255,255,.75);
+      border-color: rgba(255,255,255,.2);
+    }
+
+    /* ── PRICING ── */
+    #pricing {
+      background: var(--white);
+      padding: 7rem 8%;
+    }
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .pricing-header .section-title { color: var(--black); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--gray);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .pricing-card {
+      background: var(--white);
+      padding: 3rem 2.5rem;
+      position: relative;
+      transition: transform .3s;
+    }
+    .pricing-card.featured {
+      background: var(--black);
+      color: var(--white);
+      transform: scaleY(1.02);
+      z-index: 1;
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -1px; left: 50%; transform: translateX(-50%);
+      background: var(--red);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .3rem 1rem;
+    }
+    .pricing-name {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: .5rem;
+    }
+    .pricing-card.featured .pricing-name { color: var(--white); }
+
+    .pricing-price {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 3.5rem;
+      line-height: 1;
+      color: var(--red);
+      margin: 1.5rem 0 .25rem;
+    }
+    .pricing-period {
+      font-size: .85rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+    .pricing-card.featured .pricing-period { color: rgba(255,255,255,.5); }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 2.5rem;
+    }
+    .pricing-features li {
+      font-size: .9rem;
+      font-weight: 400;
+      padding: .6rem 0;
+      border-bottom: 1px solid var(--gray);
+      display: flex;
+      gap: .75rem;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+    .pricing-card.featured .pricing-features li {
+      border-color: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.8);
+    }
+    .pricing-features li::before {
+      content: '→';
+      color: var(--red);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .pricing-cta {
+      display: block;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: .9rem;
+      border: 2px solid var(--red);
+      color: var(--red);
+      transition: all .2s;
+    }
+    .pricing-cta:hover { background: var(--red); color: var(--white); }
+    .pricing-card.featured .pricing-cta {
+      background: var(--red);
+      color: var(--white);
+      border-color: var(--red);
+    }
+    .pricing-card.featured .pricing-cta:hover { background: var(--red-dark); }
+
+    .pricing-note {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: .9rem;
+      color: var(--text-light);
+    }
+    .pricing-note strong { color: var(--red); }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--cream);
+      padding: 7rem 8%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-img-wrap {
+      position: relative;
+      aspect-ratio: 3/4;
+      max-width: 420px;
+    }
+    .about-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 2px;
+      filter: grayscale(10%);
+    }
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: 16px; left: 16px;
+      right: -16px; bottom: -16px;
+      border: 2px solid var(--red);
+      border-radius: 2px;
+      z-index: -1;
+    }
+    .about-tag-float {
+      position: absolute;
+      bottom: -1.5rem; right: -1.5rem;
+      background: var(--red);
+      color: var(--white);
+      padding: 1.2rem 1.5rem;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.8rem;
+      line-height: 1;
+      text-align: center;
+    }
+    .about-tag-float span {
+      display: block;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .8;
+      margin-top: .2rem;
+    }
+
+    .about-content .section-title { color: var(--black); margin-bottom: 1.5rem; }
+    .about-lead {
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .about-body {
+      font-size: .95rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+    }
+    .about-credentials {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      margin-bottom: 2.5rem;
+    }
+    .credential {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: .9rem;
+      font-weight: 500;
+    }
+    .credential::before {
+      content: '';
+      display: block;
+      width: 20px; height: 2px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials {
+      background: var(--black);
+      padding: 7rem 8%;
+      color: var(--white);
+    }
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .testimonials-header .section-title { color: var(--white); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: rgba(255,255,255,.1);
+    }
+    .testimonial-card {
+      background: #1a1a1a;
+      padding: 3rem;
+    }
+    .testimonial-quote {
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,255,255,.8);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+    .testimonial-quote::before { content: '\201C'; color: var(--red); font-size: 3rem; line-height: 0; vertical-align: -.6em; margin-right: .25rem; }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .testimonial-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--white);
+    }
+    .testimonial-company {
+      font-size: .85rem;
+      color: rgba(255,255,255,.4);
+      margin-top: .1rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--cream);
+      padding: 7rem 8%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-info .section-title { color: var(--black); margin-bottom: 1.5rem; }
+    .contact-info p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+    }
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .contact-detail-icon {
+      width: 40px; height: 40px;
+      background: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+    .form-group label {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: .8rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      font-family: var(--font-body);
+      font-size: .95rem;
+      padding: .85rem 1rem;
+      background: var(--white);
+      border: 1px solid var(--gray);
+      border-radius: 2px;
+      outline: none;
+      transition: border-color .2s;
+      color: var(--text);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--red); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-submit {
+      margin-top: .5rem;
+      background: var(--red);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .95rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 1rem;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .form-submit:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      color: rgba(255,255,255,.4);
+      padding: 2.5rem 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .85rem;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .footer-logo span { color: var(--red); }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,.4);
+      text-decoration: none;
+      font-size: .85rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--red); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .hero-content { padding: 3rem 6%; }
+      .problem-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .problem-items { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card.featured { transform: none; }
+      #about { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img-wrap { max-width: 100%; aspect-ratio: 4/3; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      #contact { grid-template-columns: 1fr; gap: 3rem; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <div class="nav-logo-mark"></div>
+      <span class="nav-logo-text">Essentia <span>Communication</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Tarifs</a></li>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#contact" class="nav-cta">Parlons-en</a></li>
+    </ul>
+    <div class="nav-burger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Consultant Marketing — Belgique</div>
+      <h1 class="hero-title">
+        Vous gérez<br>
+        votre <span class="accent">business.</span><br>
+        <span class="line-outline">On s'occupe</span><br>
+        de votre<br>
+        <span class="accent">visibilité.</span>
+      </h1>
+      <p class="hero-sub">
+        Essentia Communication accompagne les indépendants et PME belges avec une stratégie marketing complète — réseaux sociaux, vidéo, branding et bien plus.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Parlons-en →</a>
+        <a href="#services" class="btn-secondary">Nos services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80" alt="Réunion marketing" />
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Ans d'expérience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Sur-mesure</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">BE</div>
+          <div class="stat-label">Ancrage local</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="problem-grid">
+      <div class="reveal">
+        <div class="section-label">Le constat</div>
+        <h2 class="section-title" style="color:white">Vous méritez mieux.</h2>
+      </div>
+      <div class="problem-items">
+        <div class="problem-item reveal">
+          <div class="problem-item-num">01</div>
+          <h3>Vous manquez de temps</h3>
+          <p>Gérer votre activité est déjà un travail à plein temps. La communication passe toujours en dernier — et ça se voit.</p>
+        </div>
+        <div class="problem-item reveal">
+          <div class="problem-item-num">02</div>
+          <h3>Vous êtes invisible en ligne</h3>
+          <p>Vos concurrents publient tous les jours. Votre dernier post remonte à trois mois. Pendant ce temps, leurs clients vous passent sous le nez.</p>
+        </div>
+        <div class="problem-item reveal">
+          <div class="problem-item-num">03</div>
+          <h3>Votre image ne vous ressemble pas</h3>
+          <p>Votre activité est professionnelle. Votre communication, elle, ne reflète pas encore ce niveau d'exigence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-header reveal">
+      <div>
+        <div class="section-label">Ce que nous faisons</div>
+        <h2 class="section-title">Nos services</h2>
+      </div>
+      <a href="#contact" class="btn-primary">Demander un devis</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">📱</div>
+        <div class="service-title">Réseaux Sociaux</div>
+        <p class="service-desc">Gestion complète de votre présence sociale, de la stratégie à la publication.</p>
+        <ul class="service-items">
+          <li>Stratégie de contenu sur-mesure</li>
+          <li>Publications professionnelles</li>
+          <li>Gestion Meta Ads</li>
+          <li>Reporting & analyse</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🎬</div>
+        <div class="service-title">Photos & Vidéos</div>
+        <p class="service-desc">Des productions visuelles impactantes pour valoriser votre activité.</p>
+        <ul class="service-items">
+          <li>Shooting photo professionnel</li>
+          <li>Production vidéo</li>
+          <li>Direction créative</li>
+          <li>Retouche & post-production</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🌐</div>
+        <div class="service-title">Visibilité en Ligne</div>
+        <p class="service-desc">Votre présence digitale optimisée pour attirer les bons clients.</p>
+        <ul class="service-items">
+          <li>Création de site web</li>
+          <li>Google Ads</li>
+          <li>Référencement SEO</li>
+          <li>Google My Business</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🎨</div>
+        <div class="service-title">Graphisme & Branding</div>
+        <p class="service-desc">Une identité visuelle cohérente qui vous différencie durablement.</p>
+        <ul class="service-items">
+          <li>Identité visuelle complète</li>
+          <li>Création de supports</li>
+          <li>Objets personnalisés</li>
+          <li>Supports print & digital</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="pricing-header reveal">
+      <div class="section-label">Investissement</div>
+      <h2 class="section-title">Choisissez votre pack</h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Pack Follower</div>
+        <div class="pricing-price">895€</div>
+        <div class="pricing-period">par mois, HTVA</div>
+        <ul class="pricing-features">
+          <li>4 publications/mois sur vos réseaux</li>
+          <li>Calendrier éditorial annuel fixe</li>
+          <li>Rapportage semestriel Meta</li>
+          <li>1 journée de tournage/semestre</li>
+          <li>Production vidéo & retouche photo</li>
+          <li>1 round de modifications inclus</li>
+          <li>Tarif régie : 80€/h</li>
+        </ul>
+        <a href="#contact" class="pricing-cta">Commencer</a>
+      </div>
+      <div class="pricing-card featured reveal">
+        <div class="pricing-badge">Le plus populaire</div>
+        <div class="pricing-name">Pack Challenger</div>
+        <div class="pricing-price">1.295€</div>
+        <div class="pricing-period">par mois, HTVA</div>
+        <ul class="pricing-features">
+          <li>8 publications/mois sur vos réseaux</li>
+          <li>Calendrier éditorial semi-flexible</li>
+          <li>Rapportage trimestriel Meta</li>
+          <li>1 journée de tournage/trimestre</li>
+          <li>Production vidéo & retouche photo</li>
+          <li>1 round de modifications inclus</li>
+          <li>Tarif régie : 70€/h</li>
+        </ul>
+        <a href="#contact" class="pricing-cta">Commencer</a>
+      </div>
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Pack Leader</div>
+        <div class="pricing-price">1.695€</div>
+        <div class="pricing-period">par mois, HTVA</div>
+        <ul class="pricing-features">
+          <li>12 publications/mois sur vos réseaux</li>
+          <li>Calendrier éditorial adaptatif</li>
+          <li>Rapportage trimestriel Meta</li>
+          <li>1 journée de tournage/trimestre</li>
+          <li>Production vidéo & retouche photo</li>
+          <li>1 campagne Meta Ads/trimestre</li>
+          <li>Partenaire marketing au quotidien</li>
+        </ul>
+        <a href="#contact" class="pricing-cta">Commencer</a>
+      </div>
+    </div>
+    <p class="pricing-note reveal">Vous avez un besoin spécifique ? <strong>Contactez-nous pour une offre sur-mesure.</strong></p>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-visual reveal">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Alexis Godeau" />
+        <div class="about-tag-float">6+ <span>Années d'exp.</span></div>
+      </div>
+    </div>
+    <div class="about-content reveal">
+      <div class="section-label">À propos</div>
+      <h2 class="section-title">Alexis<br>Godeau</h2>
+      <p class="about-lead">Fondateur d'Essentia Communication, je mets plus de 6 ans d'expertise marketing au service des indépendants et PME belges.</p>
+      <p class="about-body">Marketeer en entreprise depuis plusieurs années dans l'écosystème corporate belge, j'ai créé Essentia Communication pour mettre cette expertise au service des entrepreneurs qui méritent une communication à la hauteur de leur ambition — sans les budgets d'une grande agence.</p>
+      <div class="about-credentials">
+        <div class="credential">Diplômé en Marketing & Sales Management</div>
+        <div class="credential">6+ années d'expérience en marketing corporate</div>
+        <div class="credential">Expert réseaux sociaux, branding & stratégie digitale</div>
+        <div class="credential">Ancrage local — Wallonie & Bruxelles</div>
+      </div>
+      <a href="#contact" class="btn-primary">Travaillons ensemble →</a>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="testimonials-header reveal">
+      <div class="section-label">Ils nous font confiance</div>
+      <h2 class="section-title" style="color:white">Ce que disent nos clients</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">Alexis a complètement transformé notre présence en ligne. En quelques semaines, notre engagement sur les réseaux a explosé et nous avons reçu plusieurs nouveaux clients directement via Instagram.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Atelier Jean Regniers</div>
+            <div class="testimonial-company">Artisanat — Bienne-lez-Happart</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">Un partenaire marketing sérieux, réactif et créatif. La direction créative sur notre shooting vidéo était exactement ce dont nous avions besoin pour valoriser notre établissement.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">R</div>
+          <div>
+            <div class="testimonial-name">Client — Horeca</div>
+            <div class="testimonial-company">Restaurant & Café Brunch — Région de La Louvière</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-info reveal">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Parlons de<br>votre projet</h2>
+      <p>Vous avez un projet, une question ou vous souhaitez simplement en savoir plus ? Remplissez le formulaire ou contactez-moi directement.</p>
+      <div class="contact-details">
+        <a href="mailto:hello@essentia-communication.be" class="contact-detail">
+          <div class="contact-detail-icon">✉️</div>
+          hello@essentia-communication.be
+        </a>
+        <a href="tel:+32XXXXXXXXX" class="contact-detail">
+          <div class="contact-detail-icon">📞</div>
+          +32 XXX XX XX XX
+        </a>
+        <a href="https://instagram.com" target="_blank" class="contact-detail">
+          <div class="contact-detail-icon">📸</div>
+          @essentia.communication
+        </a>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Prénom *</label>
+          <input type="text" placeholder="Jean" required />
+        </div>
+        <div class="form-group">
+          <label>Nom *</label>
+          <input type="text" placeholder="Dupont" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" placeholder="jean.dupont@entreprise.be" required />
+      </div>
+      <div class="form-group">
+        <label>Entreprise</label>
+        <input type="text" placeholder="Votre société" />
+      </div>
+      <div class="form-group">
+        <label>Vous êtes intéressé par</label>
+        <select>
+          <option value="">Sélectionnez un service</option>
+          <option>Réseaux Sociaux</option>
+          <option>Photos & Vidéos</option>
+          <option>Visibilité en Ligne</option>
+          <option>Graphisme & Branding</option>
+          <option>Pack complet</option>
+          <option>Autre / Je ne sais pas encore</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Votre message *</label>
+        <textarea placeholder="Décrivez brièvement votre projet ou votre besoin..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Envoyer ma demande →</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Essentia <span>Communication</span></div>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Tarifs</a></li>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div>© 2026 Essentia Communication — TVA BE XXXX.XXX.XXX</div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Mobile menu
+    function toggleMenu() {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '72px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'white';
+      links.style.padding = '1.5rem 8%';
+      links.style.borderBottom = '1px solid #e8e4dc';
+      links.style.boxShadow = '0 8px 24px rgba(0,0,0,.08)';
+    }
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = '✓ Message envoyé !';
+      btn.style.background = '#2a7a2a';
+      setTimeout(() => {
+        btn.textContent = 'Envoyer ma demande →';
+        btn.style.background = '';
+        e.target.reset();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
